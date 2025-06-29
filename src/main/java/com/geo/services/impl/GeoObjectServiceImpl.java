@@ -15,13 +15,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
-@Data
 @Service
 @Slf4j
 public class GeoObjectServiceImpl implements GeoObjectService {
 
-    private GeoObjectRepository geoObjectRepository;
-    private GeoObjectMapper mapper;
+    private final GeoObjectRepository geoObjectRepository;
+    private final GeoObjectMapper mapper;
 
     @Autowired
     public GeoObjectServiceImpl(GeoObjectRepository geoObjectRepository, GeoObjectMapper mapper) {
