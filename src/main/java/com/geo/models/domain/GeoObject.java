@@ -1,9 +1,6 @@
 package com.geo.models.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -11,6 +8,7 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
+@Entity
 @Table(name = "geo_object")
 public class GeoObject {
     @Id
