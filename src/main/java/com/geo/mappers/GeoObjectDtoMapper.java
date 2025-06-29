@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class GeoObjectMapper {
+public class GeoObjectDtoMapper {
     public GeoObjectResponse convertToResponse(GeoObject geoObject) {
         return new GeoObjectResponse(
                 geoObject.getId(),

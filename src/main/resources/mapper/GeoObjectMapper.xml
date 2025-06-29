@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.geo.repositories.GeoObjectMapper">
+
+    <resultMap id="GeoObjectResult" type="GeoObject">
+        <id property="id" column="id" javaType="java.util.UUID" jdbcType="OTHER"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="geometryGeoJson" column="geometry_geo_json"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="GeoObjectResult">
+        SELECT id,
+               name,
+               type,
+               geometry_geo_json
+        FROM geo_object
+    </select>
+
+    <select id="findById" parameterType="java.lang.String" resultMap="GeoObjectResult">
+        SELECT id,
+               name,
+               type,
+               geometry_geo_json
+        FROM geo_object
+        WHERE id = #{id}::uuid
+    </select>
+
+    <insert id="save" parameterType="GeoObject">
+        INSERT INTO geo_object (id, name, type, geometry_geo_json)
+        VALUES (#{id, javaType=java.util.UUID, jdbcType=OTHER}, #{name}, #{type}, #{geometryGeoJson})
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        DELETE FROM geo_object
+        WHERE id = #{id}::uuid
+    </delete>
+
+</mapper>

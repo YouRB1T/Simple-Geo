@@ -1,13 +1,12 @@
 package com.geo.services.impl;
 
-import com.geo.mappers.GeoObjectMapper;
+import com.geo.mappers.GeoObjectDtoMapper;
 import com.geo.models.domain.GeoObject;
 import com.geo.models.dto.GeoObjectDeleteRequest;
 import com.geo.models.dto.GeoObjectRequest;
 import com.geo.models.dto.GeoObjectResponse;
-import com.geo.repositories.GeoObjectRepository;
+import com.geo.repositories.GeoObjectMapper;
 import com.geo.services.GeoObjectService;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +18,11 @@ import java.util.UUID;
 @Slf4j
 public class GeoObjectServiceImpl implements GeoObjectService {
 
-    private final GeoObjectRepository geoObjectRepository;
-    private final GeoObjectMapper mapper;
+    private final GeoObjectMapper geoObjectRepository;
+    private final GeoObjectDtoMapper mapper;
 
     @Autowired
-    public GeoObjectServiceImpl(GeoObjectRepository geoObjectRepository, GeoObjectMapper mapper) {
+    public GeoObjectServiceImpl(GeoObjectMapper geoObjectRepository, GeoObjectDtoMapper mapper) {
         this.geoObjectRepository = geoObjectRepository;
         this.mapper = mapper;
     }
@@ -51,7 +50,7 @@ public class GeoObjectServiceImpl implements GeoObjectService {
     @Override
     public GeoObjectResponse deleteObject(GeoObjectDeleteRequest request) {
         GeoObject object = mapper.convertDeleteRequestToObject(request);
-        geoObjectRepository.delete(object);
+        geoObjectRepository.deleteById(String.valueOf(object.getId()));
         log.info("Delete object" + object);
         return mapper.convertToResponse(object);
     }
